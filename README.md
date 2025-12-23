@@ -27,6 +27,25 @@ A production-ready Machine Learning pipeline for predicting Titanic survival, de
 
 ---
 
+## 📂 Project Structure
+The project follows a modular architecture to separate concerns (Training vs. Inference):
+
+```text
+titanic-mlops-k8s/
+├── k8s/                     # Kubernetes Manifests (Deployment & Service)
+├── src/
+│   ├── api/                 # FastAPI Application (Entry point)
+│   ├── components/          # ML Pipeline Components (Ingestion, Transformation)
+│   ├── pipelines/           # Training Pipelines
+│   └── ui/                  # Streamlit Dashboard Code
+├── tests/                   # Pytest Unit Tests
+├── Dockerfile               # Multi-stage Docker Build
+├── requirements.txt         # Project Dependencies
+└── params.yaml              # Configuration Controller
+```
+
+---
+
 ## 📦 How to Run
 
 ### 1. Run with Docker
