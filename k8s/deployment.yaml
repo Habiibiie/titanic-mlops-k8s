@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanic-deployment
+spec:
+  replicas: 1  # 1 adet kopya çalıştır
+  selector:
+    matchLabels:
+      app: titanic-api
+  template:
+    metadata:
+      labels:
+        app: titanic-api
+    spec:
+      containers:
+      - name: titanic-container
+        image: titanic-api:v3
+        imagePullPolicy: Never  # İmajı internette arama, yükledik zaten!
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titanic-service
+spec:
+  selector:
+    app: titanic-api
+  type: NodePort  # Dışarıdan erişim için kapı aç
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

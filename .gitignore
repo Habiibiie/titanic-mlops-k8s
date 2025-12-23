@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Enviornment
+venv/
+env/
+.env/
+.venv/
+miniconda3/
+
+# IDE Settings
+.idea/
+.vscode/
+
+# Dataset
+src/data/raw/
+srd/data/processed/
+*.csv
+
+# Model Files
+model/*.pkl
+
+# Logs
+*.log
+
+# OS Settings
+.DS_Store
+Thumbs.db

@@ -1,0 +1,17 @@
+external_data_config:
+  external_data_csv: data/raw/train.csv
+
+preprocessing_config:
+  train_test_split_ratio: 0.2
+  random_state: 42
+
+model_config:
+  model_dir: "models"
+  model_name: "titanic_pipeline.pkl"
+  n_estimators: 50
+  max_depth: 10
+  random_state: 1
+
+tuning_config:
+  n_estimators: [50, 100, 200]
+  max_depth: [3, 5, 10]
