@@ -87,7 +87,13 @@ titanic-mlops-k8s/
 
 ## 📦 How to Run
 
-### 1. Local Development (Python)
+### 1. Load the project
+```bash
+git clone https://github.com/enesgulerml/titanic-mlops-k8s.git
+cd titanic-mlops-k8s
+```
+
+### 2. Local Development (Python)
 If you want to run the components separately for development:
 ```bash
 # Start Backend
@@ -97,7 +103,7 @@ uvicorn src.api.app:app --reload
 streamlit run src/ui/dashboard.py
 ```
 
-### 2. Local Deployment (Docker Compose) - RECOMMENDED
+### 3. Local Deployment (Docker Compose) - RECOMMENDED
 The easiest way to run the entire stack (API + UI) with a single command:
 ```bash
 # Build and Start
@@ -105,7 +111,7 @@ docker-compose up --build
 ```
 Access the Dashboard at: http://localhost:8501
 
-### 3. Kubernetes (Local Test)
+### 4. Kubernetes (Local Test)
 To test the orchestration layer locally:
 ```bash
 minikube start
