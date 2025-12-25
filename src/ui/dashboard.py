@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import json
+import os
 
 # Page Settings
 st.set_page_config(page_title="Titanic Survival Prediction", layout="centered")
@@ -47,10 +48,11 @@ if submit_val:
         "Embarked": embarked,
     }
 
-    API_URL = "http://localhost:8080/predict"
+    API_URL = os.getenv("API_URL", "http://localhost:8000")
+    ENDPOINT = f"{API_URL}/predict"
 
     try:
-        response = requests.post(API_URL, json=data)
+        response = requests.post(ENDPOINT, json=data)
         if response.status_code == 200:
             result = response.json()
             prediction = result["prediction"]
