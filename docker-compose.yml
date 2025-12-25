@@ -9,14 +9,14 @@ services:
       - "8000:8000"
     restart: always
 
-    ui:
-      image: ${FULL_IMAGE_NAME}
-      container_name: titanic-ui
-      command: streamlit run src/ui/dashboard.py --server.port 8501 --server.address 0.0.0.0
-      ports:
-        - "80:8501"
-      environment:
-        - API_URL=http://api:8000
-      depends on:
-        - api
-      restart: always
+  ui:
+    image: ${FULL_IMAGE_NAME}
+    container_name: titanic-ui
+    command: streamlit run src/ui/dashboard.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "80:8501"
+    environment:
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+    restart: always
