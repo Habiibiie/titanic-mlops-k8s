@@ -109,7 +109,7 @@ The easiest way to run the entire stack (API + UI) with a single command:
 # Build and Start
 docker-compose up --build
 ```
-Access the Dashboard at: http://localhost:8501
+Access the Dashboard at: http://localhost
 
 ### 4. Kubernetes (Local Test)
 To test the orchestration layer locally:
