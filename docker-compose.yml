@@ -2,16 +2,22 @@ version: '3.8'
 
 services:
   api:
-    image: ${FULL_IMAGE_NAME}
+    image: ${FULL_IMAGE_NAME:-titanic-api:local}
     container_name: titanic-api
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: uvicorn src.api.app:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
     restart: always
 
   ui:
-    image: ${FULL_IMAGE_NAME}
+    image: ${FULL_IMAGE_NAME:-titanic-ui:local}
     container_name: titanic-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: streamlit run src/ui/dashboard.py --server.port 8501 --server.address 0.0.0.0
     ports:
       - "80:8501"
