@@ -48,11 +48,10 @@ if submit_val:
         "Embarked": embarked,
     }
 
-    API_URL = os.getenv("API_URL", "http://localhost:8000")
-    ENDPOINT = f"{API_URL}/predict"
+    URL = "http://api:8000/predict"
 
     try:
-        response = requests.post(ENDPOINT, json=data)
+        response = requests.post(URL, json=data)
         if response.status_code == 200:
             result = response.json()
             prediction = result["prediction"]
