@@ -22,7 +22,7 @@ srd/data/processed/
 logs/
 
 # Model Files
-models/
+# models/
 
 # Logs
 *.log
