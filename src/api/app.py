@@ -3,12 +3,24 @@ from pydantic import BaseModel, Field
 import uvicorn
 import os
 import sys
+import redis
+import json
+import hashlib
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.pipelines.prediction_pipeline import make_prediction
 from src.utils.logger import get_logger
 
 logger = get_logger("API")
+
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+try:
+    r = redis.Redis(host=REDIS_HOST, port=6379, db=0, decode_responses=True)
+    r.ping()
+    logger.info("Redis bağlantısı başarılı! 🚀")
+except Exception as e:
+    logger.warning(f"Redis'e bağlanılamadı, caching devre dışı: {e}")
+    r = None
 
 app = FastAPI(
     title="Titanic Survival Prediction API",
@@ -61,21 +73,37 @@ def read_root():
 
 @app.post("/predict")
 def predict_survival(passenger: PassengerData):
-    """
-    Tek bir yolcu için hayatta kalma tahmini yapar.
-    """
     try:
-        logger.info(f"API isteği alındı: {passenger.Name}")
-
+        # 1. Unique Key Oluşturma (Gelen veriyi hash'le)
         data_dict = passenger.dict()
+        data_str = json.dumps(data_dict, sort_keys=True)
+        cache_key = hashlib.sha256(data_str.encode()).hexdigest()
 
+        # 2. Redis Kontrolü (Cache Hit)
+        if r:
+            cached_result = r.get(cache_key)
+            if cached_result:
+                logger.info(f"Cache HIT! Redis'ten cevap dönülüyor: {passenger.Name}")
+                return json.loads(cached_result)
+
+        # 3. Cache Miss (Tahmin Yap)
+        logger.info(f"Cache MISS. Model çalıştırılıyor: {passenger.Name}")
         result = make_prediction(data_dict, MODEL_PATH)
 
-        return {
+        response_payload = {
             "passenger_name": passenger.Name,
             "prediction": result,
-            "success": True
+            "success": True,
+            "source": "model"
         }
+
+        # 4. Sonucu Redis'e Yaz (1 Saatlik ömür verelim - 3600 sn)
+        if r:
+            cache_payload = response_payload.copy()
+            cache_payload["source"] = "cache"
+            r.setex(cache_key, 3600, json.dumps(cache_payload))
+
+        return response_payload
 
     except Exception as e:
         logger.error(f"API Hatası: {str(e)}")

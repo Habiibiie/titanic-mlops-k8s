@@ -10,6 +10,10 @@ services:
     command: uvicorn src.api.app:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
     restart: always
 
   ui:
@@ -25,4 +29,11 @@ services:
       - API_URL=http://api:8000
     depends_on:
       - api
+    restart: always
+
+  redis:
+    image: redis:alpine
+    container_name: titanic-redis
+    ports:
+      - "6379:6379"
     restart: always
