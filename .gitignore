@@ -14,9 +14,7 @@ miniconda3/
 .vscode/
 
 # Dataset
-src/data/raw/
-srd/data/processed/
-*.csv
+data/
 
 # Logs
 logs/
@@ -30,3 +28,6 @@ logs/
 # OS Settings
 .DS_Store
 Thumbs.db
+
+# MLflow
+mlflow_data/
