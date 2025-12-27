@@ -23,6 +23,6 @@ def get_logger(name):
 
 if __name__ == "__main__":
     logger = get_logger("TestLogger")
-    logger.info("Bu bir bilgi mesajıdır.")
-    logger.warning("Bu bir uyarıdır!")
-    logger.error("Eyvah hata oluştu.")
+    logger.info("This is an informational message.")
+    logger.warning("This is a warning!")
+    logger.error("Oh no, an error occurred.")

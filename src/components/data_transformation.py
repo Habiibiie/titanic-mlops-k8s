@@ -87,7 +87,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
 if __name__ == "__main__":
     df_test = pd.DataFrame({
         "PassengerId": [1,2,3],
-        "Name" : ["Ali","Ayşe","Veli"],
+        "Name" : ["Ali","Jenna","Veli"],
         "Age" : [20, np.nan, 40],
         "Sex" : ["male", "female", "male"],
         "Embarked" : ["S", np.nan, "C"],

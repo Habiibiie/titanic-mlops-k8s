@@ -40,16 +40,16 @@ def hyperparameter_optimization(config_path):
         'model__max_depth': config['tuning_config']['max_depth']
     }
 
-    print(f"🔍 Optimizasyon Başlıyor... Denenecek kombinasyonlar: {param_grid}")
+    print(f"🔍 Optimization begins... Combinations to be tried: {param_grid}")
 
     grid_search = GridSearchCV(pipeline, param_grid, cv=3, scoring='accuracy', verbose=1)
     grid_search.fit(X_train, y_train)
 
     print("\n-------------------------------------------")
-    print(f"🏆 EN İYİ SKOR: {grid_search.best_score_:.4f}")
-    print(f"🥇 EN İYİ PARAMETRELER: {grid_search.best_params_}")
+    print(f"🏆 BEST SCORE: {grid_search.best_score_:.4f}")
+    print(f"🥇 BEST PARAMETERS: {grid_search.best_params_}")
     print("-------------------------------------------")
-    print("💡 İPUCU: Bu değerleri params.yaml dosyasındaki 'model_config' kısmına yazabilirsin.")
+    print("💡 TIP: You can add these values to the 'model_config' section of the params.yaml file.")
 
 
 if __name__ == "__main__":

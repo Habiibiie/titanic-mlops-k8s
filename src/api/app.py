@@ -18,34 +18,34 @@ REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 try:
     r = redis.Redis(host=REDIS_HOST, port=6379, db=0, decode_responses=True)
     r.ping()
-    logger.info("Redis bağlantısı başarılı! 🚀")
+    logger.info("Redis connection successful! 🚀")
 except Exception as e:
-    logger.warning(f"Redis'e bağlanılamadı, caching devre dışı: {e}")
+    logger.warning(f"Could not connect to Redis, caching is disabled: {e}")
     r = None
 
 app = FastAPI(
     title="Titanic Survival Prediction API",
-    description="MLOps best practices kullanılarak hazırlanmış tahmin servisi.",
+    description="An forecasting service developed using MLOps best practices.",
     version="1.0.0"
 )
 
-# --- PROMETHEUS ENTEGRASYONU ---
+# --- PROMETHEUS ---
 Instrumentator().instrument(app).expose(app)
 
 
 # --- 1. Data Validation ---
 class PassengerData(BaseModel):
-    PassengerId: int = Field(..., description="Yolcu ID (Pipeline silecek ama format bozulmasın diye istiyoruz)")
-    Name: str = Field(..., description="Yolcunun Adı")
-    Pclass: int = Field(..., ge=1, le=3, description="Bilet Sınıfı (1, 2 veya 3 olmalı)")
-    Sex: str = Field(..., pattern="^(male|female)$", description="Cinsiyet ('male' veya 'female')")
-    Age: float = Field(..., ge=0, le=120, description="Yaş (0-120 arası)")
-    SibSp: int = Field(0, ge=0, description="Kardeş/Eş Sayısı")
-    Parch: int = Field(0, ge=0, description="Ebeveyn/Çocuk Sayısı")
-    Ticket: str = Field("Unknown", description="Bilet Numarası")
-    Fare: float = Field(..., ge=0, description="Bilet Fiyatı")
-    Cabin: str = Field(None, description="Kabin Numarası")
-    Embarked: str = Field("S", pattern="^(S|C|Q)$", description="Biniş Limanı (S, C, Q)")
+    PassengerId: int = Field(..., description="Passenger ID (We want the pipeline wiper so the format isn't corrupted)")
+    Name: str = Field(..., description="Passenger's Name")
+    Pclass: int = Field(..., ge=1, le=3, description="Ticket Class (must be 1, 2 or 3)")
+    Sex: str = Field(..., pattern="^(male|female)$", description="Gender ('male' or 'female')")
+    Age: float = Field(..., ge=0, le=120, description="Age (0-120)")
+    SibSp: int = Field(0, ge=0, description="Number of Siblings/Spouses")
+    Parch: int = Field(0, ge=0, description="Number of Parents/Children")
+    Ticket: str = Field("Unknown", description="Ticket Number")
+    Fare: float = Field(..., ge=0, description="Ticket Price")
+    Cabin: str = Field(None, description="Cabin Number")
+    Embarked: str = Field("S", pattern="^(S|C|Q)$", description="Boarding Port (S, C, Q)")
 
     class Config:
         json_schema_extra = {
@@ -78,20 +78,20 @@ def read_root():
 @app.post("/predict")
 def predict_survival(passenger: PassengerData):
     try:
-        # 1. Unique Key Oluşturma (Gelen veriyi hash'le)
+        # 1. Creating Unique Key
         data_dict = passenger.dict()
         data_str = json.dumps(data_dict, sort_keys=True)
         cache_key = hashlib.sha256(data_str.encode()).hexdigest()
 
-        # 2. Redis Kontrolü (Cache Hit)
+        # 2. Redis Check (Cache Hit)
         if r:
             cached_result = r.get(cache_key)
             if cached_result:
-                logger.info(f"Cache HIT! Redis'ten cevap dönülüyor: {passenger.Name}")
+                logger.info(f"Cache HIT! Redis is responding: {passenger.Name}")
                 return json.loads(cached_result)
 
-        # 3. Cache Miss (Tahmin Yap)
-        logger.info(f"Cache MISS. Model çalıştırılıyor: {passenger.Name}")
+        # 3. Cache Miss
+        logger.info(f"Cache MISS. Model is running: {passenger.Name}")
         result = make_prediction(data_dict, MODEL_PATH)
 
         response_payload = {

@@ -30,9 +30,9 @@ model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 
-print("Model Accuracy Değeri: ", accuracy_score(y_test, y_pred))
+print("Model Accuracy Value: ", accuracy_score(y_test, y_pred))
 
 import pickle
 pickle.dump(model, open('random_forest_model.pkl', 'wb'))
 
-print("Model başarıyla kaydedildi.")
+print("The model has been successfully saved.")

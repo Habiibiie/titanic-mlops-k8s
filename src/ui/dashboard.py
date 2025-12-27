@@ -18,7 +18,7 @@ with st.form("prediction_form"):
 
     with col1:
         passenger_id = st.number_input("Passenger ID", value=123)
-        name = st.text_input("Name Surname", value="Enes Guler")
+        name = st.text_input("Name Surname", value="Joe Harrington")
         pclass = st.selectbox("Class", [1, 2, 3], index=2)
         sex = st.selectbox("Sex", ["male", "female"])
         age = st.number_input("Age", min_value=0.0, max_value=100.0, value=25.0)

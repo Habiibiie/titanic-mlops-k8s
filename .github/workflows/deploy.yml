@@ -6,8 +6,8 @@ on:
     branches: [ "main" ]
 
 env:
-  AWS_REGION: eu-central-1                   # Your AWS Region
-  ECR_REPOSITORY: titanic-inference          # Your ECR Repository Name
+  AWS_REGION: eu-central-1
+  ECR_REPOSITORY: titanic-inference
 
 jobs:
   # JOB 1: BUILD AND PUSH TO ECR
@@ -42,13 +42,12 @@ jobs:
 
   # JOB 2: DEPLOY TO EC2 (VIA DOCKER COMPOSE)
   deploy:
-    needs: build-and-push  # Wait for build to finish
+    needs: build-and-push
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-      # We need this to access the docker-compose.yml file in the repo
 
     # Step A: Copy docker-compose.yml to the EC2 server
     - name: Copy Docker Compose File to Server
